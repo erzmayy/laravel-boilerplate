@@ -42,12 +42,11 @@ class PurchaseOrderController extends Controller
         
     }
     public function getPurchaseOrderLineCreate(){
-        $products = Product::all();
-        return view('admin.purchaseOrderLines.create', ["products" => $products]);
+    
 
     }
     public function postPurchaseOrderLineUpdate(){
-
+      
     }
 
     public function postPurchaseOrderLineInsert(Request $request, PurchaseOrderLine $purchaseOrderLine){

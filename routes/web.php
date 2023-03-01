@@ -77,6 +77,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('purchase-order-lines{id}/update', 'PurchaseOrderController@postPurchaseOrderLineUpdate') ->name('purchase.order.lines.update');
     Route::post('purchase-order-lines/create', 'PurchaseOrderController@postPurchaseOrderLineInsert')->name('purchase.order.lines.insert');
 
+    Route::get('reporting', 'DashboardController@getReportingPage')->name('reporting-page');
+
 });
 
 
@@ -90,3 +92,12 @@ Route::group(['as' => 'protection.'], function () {
     Route::get('membership/access-denied', 'MembershipController@failed')->name('membership.failed');
     Route::get('membership/clear-cache/', 'MembershipController@clearValidationCache')->name('membership.clear_validation_cache');
 });
+
+    Route::get('complete-registration', 'Auth\RegisterController@completeRegistration');
+
+    Route::post('/2fa', function(){
+        return redirect(URL()->previous());
+    })->name('2fa')->middleware('2fa');
+
+    Route::get('tes/2fa', 'MembershipController@index')->middleware('auth','2fa');
+
